@@ -1053,5 +1053,21 @@ footer {
     .admin-prompt button {
         margin-bottom: 5px;
     }
+/* =========================
+   ADMIN LINK
+========================= */
 
+.admin-link {
+    color: #ffffff;
+    background: #6c3cff;
+    padding: 8px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.admin-link:hover {
+    background: #8b5cf6;
+}
 }
