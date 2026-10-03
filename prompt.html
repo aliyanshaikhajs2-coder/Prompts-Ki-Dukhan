@@ -2,109 +2,255 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Prompt Details</title>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Prompt Details - Prompt Ki Dukaan</title>
+
+    <meta
+        name="description"
+        content="View detailed AI image prompts on Prompt Ki Dukaan."
+    >
 
     <link rel="stylesheet" href="style.css">
+
 </head>
+
 
 <body>
 
+
     <div class="prompt-detail">
+
 
         <a href="index.html" class="back-btn">
             ← Back to Home
         </a>
 
-        <div id="promptDetails"></div>
+
+        <div id="promptDetails">
+
+            <p>
+                Loading prompt...
+            </p>
+
+        </div>
+
 
     </div>
 
 
+
+    <!-- SUPABASE -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
     <script>
 
-        const params = new URLSearchParams(window.location.search);
+        // =========================
+        // SUPABASE CONFIG
+        // =========================
 
-        const promptIndex = params.get("id");
+        const supabaseUrl =
+            "https://uaihfdlpfryvgvrmnmjc.supabase.co";
 
-        let prompts = [
+        const supabaseKey =
+            "sb_publishable_n9njImEoqHVhf4l7Ap9Oxw_GHw1ZTws";
 
-            {
-                title: "Traditional Look Back Pose",
-                category: "Girls",
-                image: "Assets/images/girl.webp",
-                description: "A beautiful traditional portrait with an elegant look.",
-                prompt: "Create a realistic traditional portrait of a young woman looking back over her shoulder, wearing an elegant traditional outfit, soft natural lighting, detailed face, cinematic photography, realistic skin texture, high quality."
-            },
 
-            {
-                title: "Cinematic Boy Portrait",
-                category: "Boys",
-                image: "Assets/images/boy.webp",
-                description: "A stylish cinematic portrait for AI image generation.",
-                prompt: "Create a cinematic portrait of a young man standing confidently in an urban environment, dramatic lighting, stylish outfit, realistic face, detailed skin texture, professional photography, 4K."
+        const supabaseClient =
+            supabase.createClient(
+                supabaseUrl,
+                supabaseKey
+            );
+
+
+
+        // =========================
+        // GET PROMPT ID FROM URL
+        // =========================
+
+        const params =
+            new URLSearchParams(
+                window.location.search
+            );
+
+
+        const promptId =
+            params.get("id");
+
+
+
+        // =========================
+        // LOAD PROMPT
+        // =========================
+
+        async function loadPromptDetails() {
+
+            const details =
+                document.getElementById(
+                    "promptDetails"
+                );
+
+
+            if (!promptId) {
+
+                details.innerHTML = `
+
+                    <h1>
+                        Prompt Not Found ❌
+                    </h1>
+
+                    <p>
+                        No prompt ID was provided.
+                    </p>
+
+                `;
+
+                return;
             }
 
-        ];
 
 
-        const savedPrompts =
-            JSON.parse(localStorage.getItem("prompts")) || [];
+            const { data, error } =
+                await supabaseClient
+                    .from("prompts")
+                    .select("*")
+                    .eq("id", promptId)
+                    .single();
 
 
-        prompts = [...prompts, ...savedPrompts];
+
+            if (error || !data) {
+
+                console.log(
+                    "PROMPT DETAIL ERROR:",
+                    error
+                );
 
 
-        const item = prompts[promptIndex];
+                details.innerHTML = `
+
+                    <h1>
+                        Prompt Not Found ❌
+                    </h1>
+
+                    <p>
+                        Ye prompt available nahi hai.
+                    </p>
+
+                `;
+
+                return;
+            }
 
 
-        if (item) {
 
-            document.getElementById("promptDetails").innerHTML = `
+            // =========================
+            // SHOW PROMPT
+            // =========================
 
-                <img 
-                    src="${item.image}" 
-                    alt="${item.title}"
+            details.innerHTML = `
+
+                <img
+                    src="${data.image}"
+                    alt="${data.title}"
                     class="detail-image"
                 >
 
-                <h1>${item.title}</h1>
+
+                <h1>
+                    ${data.title}
+                </h1>
+
 
                 <p>
-                    <strong>Category:</strong>
-                    ${item.category}
+
+                    <strong>
+                        Category:
+                    </strong>
+
+                    ${data.category}
+
                 </p>
+
 
                 <p class="detail-description">
-                    ${item.description}
+
+                    ${data.description}
+
                 </p>
 
-                <h2>AI Prompt</h2>
+
+                <h2>
+                    AI Prompt
+                </h2>
+
 
                 <div class="full-prompt">
-                    ${item.prompt}
+
+                    ${data.prompt}
+
                 </div>
 
-                <button onclick="copyPrompt()">
+
+                <button
+                    id="copyPromptBtn"
+                    class="view-btn"
+                >
                     📋 Copy Prompt
                 </button>
 
             `;
 
 
-            window.copyPrompt = function () {
 
-                navigator.clipboard.writeText(item.prompt);
+            // =========================
+            // COPY BUTTON
+            // =========================
 
-                alert("Prompt Copied Successfully! 📋");
+            document
+                .getElementById("copyPromptBtn")
+                .addEventListener(
+                    "click",
+                    function () {
 
-            };
+                        navigator
+                            .clipboard
+                            .writeText(
+                                data.prompt
+                            )
+                            .then(
+                                function () {
+
+                                    alert(
+                                        "Prompt Copied Successfully! 📋"
+                                    );
+
+                                }
+                            );
+
+                    }
+                );
 
         }
 
+
+
+        // =========================
+        // START
+        // =========================
+
+        loadPromptDetails();
+
     </script>
+
 
 </body>
 
