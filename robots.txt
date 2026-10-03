@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-
 Sitemap: https://aliyanshaikhajs2-coder.github.io/Prompts-Ki-Dukhan/sitemap.xml
