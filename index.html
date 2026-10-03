@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Prompt Ki Dukaan - AI Photo Prompts</title>
+
+    <link rel="icon" type="image/jpeg" href="Assets/images/logo.jpg">
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         NAVIGATION
+    ========================== -->
+
+    <nav class="navbar">
+
+
+        <div class="logo">
+
+            <img
+                src="Assets/images/logo.jpg"
+                alt="Prompt Ki Dukaan Logo"
+            >
+
+            <span>
+                Prompt Ki Dukaan
+            </span>
+
+        </div>
+
+
+        <div class="nav-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="#templates">
+                Templates
+            </a>
+
+            <a href="#categories">
+                Categories
+            </a>
+
+            <a href="#collections">
+                Collections
+            </a>
+
+            <a href="#about">
+                About Us
+            </a>
+
+        </div>
+
+
+    </nav>
+
+
+
+    <!-- =========================
+         HERO
+    ========================== -->
+
+    <section class="hero">
+
+        <h1>
+            AI Prompts Ki Apni Dukaan
+        </h1>
+
+
+        <p>
+            Ready-to-use prompts for creating amazing AI images.
+        </p>
+
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="🔍 Search your perfect prompt..."
+        >
+
+    </section>
+
+
+
+    <!-- =========================
+         CATEGORIES
+    ========================== -->
+
+    <section
+        class="categories"
+        id="categories"
+    >
+
+        <button onclick="filterCategory('All')">
+            All
+        </button>
+
+        <button onclick="filterCategory('Portrait')">
+            Portrait
+        </button>
+
+        <button onclick="filterCategory('Products')">
+            Products
+        </button>
+
+        <button onclick="filterCategory('Cinematic')">
+            Cinematic
+        </button>
+
+        <button onclick="filterCategory('Aesthetic')">
+            Aesthetic
+        </button>
+
+        <button onclick="filterCategory('Cartoon & Anime')">
+            Cartoon & Anime
+        </button>
+
+        <button onclick="filterCategory('Travel')">
+            Travel
+        </button>
+
+        <button onclick="filterCategory('Festival')">
+            Festival
+        </button>
+
+        <button onclick="filterCategory('Birthday')">
+            Birthday
+        </button>
+
+        <button onclick="filterCategory('Selfie')">
+            Selfie
+        </button>
+
+        <button onclick="filterCategory('Horror')">
+            Horror
+        </button>
+
+        <button onclick="filterCategory('Wedding')">
+            Wedding
+        </button>
+
+        <button onclick="filterCategory('Girls')">
+            Girls
+        </button>
+
+        <button onclick="filterCategory('Boys')">
+            Boys
+        </button>
+
+        <button onclick="filterCategory('Couple')">
+            Couple
+        </button>
+
+        <button onclick="filterCategory('Cars')">
+            Cars
+        </button>
+
+    </section>
+
+    <br>
+
+
+
+    <!-- =========================
+         TEMPLATES
+    ========================== -->
+
+    <section id="templates">
+
+        <main>
+
+            <h2 id="promptHeading">
+                Latest AI Prompts
+            </h2>
+
+
+            <div
+                id="promptContainer"
+                class="prompt-container"
+            >
+
+                <!-- Prompts JavaScript se aayenge -->
+
+            </div>
+
+        </main>
+
+    </section>
+
+
+
+    <!-- =========================
+         COLLECTIONS
+    ========================== -->
+
+    <section id="collections">
+
+        <main>
+
+            <h2>
+                Popular Collections
+            </h2>
+
+
+            <div class="collection-grid">
+
+
+                <!-- GIRLS -->
+
+                <div class="collection-card">
+
+                    <div class="collection-icon">
+                        👩
+                    </div>
+
+                    <h3>
+                        Girls AI Prompts
+                    </h3>
+
+                    <p>
+                        Stylish and creative AI photo prompts
+                        for girls.
+                    </p>
+
+                    <button onclick="openCollection('Girls')">
+                        Explore Collection
+                    </button>
+
+                </div>
+
+
+
+                <!-- BOYS -->
+
+                <div class="collection-card">
+
+                    <div class="collection-icon">
+                        👨
+                    </div>
+
+                    <h3>
+                        Boys AI Prompts
+                    </h3>
+
+                    <p>
+                        Cinematic and stylish prompts
+                        for boys.
+                    </p>
+
+                    <button onclick="openCollection('Boys')">
+                        Explore Collection
+                    </button>
+
+                </div>
+
+
+
+                <!-- COUPLE -->
+
+                <div class="collection-card">
+
+                    <div class="collection-icon">
+                        💑
+                    </div>
+
+                    <h3>
+                        Couple AI Prompts
+                    </h3>
+
+                    <p>
+                        Beautiful couple photography
+                        prompts.
+                    </p>
+
+                    <button onclick="openCollection('Couple')">
+                        Explore Collection
+                    </button>
+
+                </div>
+
+
+
+                <!-- BIRTHDAY -->
+
+                <div class="collection-card">
+
+                    <div class="collection-icon">
+                        🎂
+                    </div>
+
+                    <h3>
+                        Birthday Prompts
+                    </h3>
+
+                    <p>
+                        Creative birthday photography
+                        prompts.
+                    </p>
+
+                    <button onclick="openCollection('Birthday')">
+                        Explore Collection
+                    </button>
+
+                </div>
+
+
+
+                <!-- CARS -->
+
+                <div class="collection-card">
+
+                    <div class="collection-icon">
+                        🚗
+                    </div>
+
+                    <h3>
+                        Car AI Prompts
+                    </h3>
+
+                    <p>
+                        Amazing cinematic car photography
+                        prompts.
+                    </p>
+
+                    <button onclick="openCollection('Cars')">
+                        Explore Collection
+                    </button>
+
+                </div>
+
+
+
+                <!-- FESTIVAL -->
+
+                <div class="collection-card">
+
+                    <div class="collection-icon">
+                        🎉
+                    </div>
+
+                    <h3>
+                        Festival Prompts
+                    </h3>
+
+                    <p>
+                        Creative prompts for special
+                        festivals and events.
+                    </p>
+
+                    <button onclick="openCollection('Festival')">
+                        Explore Collection
+                    </button>
+
+                </div>
+
+
+            </div>
+
+        </main>
+
+    </section>
+
+
+
+    <!-- =========================
+         ABOUT
+    ========================== -->
+
+    <section id="about">
+
+        <main>
+
+            <h2>
+                About Prompt Ki Dukaan
+            </h2>
+             <br>  
+
+            <div class="prompt-card">
+
+                <div class="prompt-content">
+
+                    <h3>
+                        AI Prompts, Simple Aur Ready-to-Use
+                    </h3>
+
+                    <p>
+                        Prompt Ki Dukaan ek AI prompt library hai
+                        jahan aapko AI image generation ke liye
+                        ready-to-use prompts milte hain.
+                    </p>
+
+                    <p>
+                        Portraits, cinematic photos, fashion,
+                        couples, cars aur different creative
+                        categories mein prompts explore karein.
+                    </p>
+
+
+                    <div
+                        style="
+                            display:flex;
+                            gap:10px;
+                            flex-wrap:wrap;
+                            margin-top:20px;
+                        "
+                    >
+
+                        <a
+                            href="contact.html"
+                            class="view-btn"
+                        >
+                            Contact Us
+                        </a>
+
+
+                        <a
+                            href="privacy.html"
+                            class="view-btn"
+                        >
+                            Privacy Policy
+                        </a>
+
+
+                        <a
+                            href="terms.html"
+                            class="view-btn"
+                        >
+                            Terms & Conditions
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </section>
+
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+        <p>
+            © 2026 Prompt Ki Dukaan. All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="script.js"></script>
+
+
+</body>
+
+</html>

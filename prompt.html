@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Prompt Details</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="prompt-detail">
+
+        <a href="index.html" class="back-btn">
+            ← Back to Home
+        </a>
+
+        <div id="promptDetails"></div>
+
+    </div>
+
+
+    <script>
+
+        const params = new URLSearchParams(window.location.search);
+
+        const promptIndex = params.get("id");
+
+        let prompts = [
+
+            {
+                title: "Traditional Look Back Pose",
+                category: "Girls",
+                image: "Assets/images/girl.webp",
+                description: "A beautiful traditional portrait with an elegant look.",
+                prompt: "Create a realistic traditional portrait of a young woman looking back over her shoulder, wearing an elegant traditional outfit, soft natural lighting, detailed face, cinematic photography, realistic skin texture, high quality."
+            },
+
+            {
+                title: "Cinematic Boy Portrait",
+                category: "Boys",
+                image: "Assets/images/boy.webp",
+                description: "A stylish cinematic portrait for AI image generation.",
+                prompt: "Create a cinematic portrait of a young man standing confidently in an urban environment, dramatic lighting, stylish outfit, realistic face, detailed skin texture, professional photography, 4K."
+            }
+
+        ];
+
+
+        const savedPrompts =
+            JSON.parse(localStorage.getItem("prompts")) || [];
+
+
+        prompts = [...prompts, ...savedPrompts];
+
+
+        const item = prompts[promptIndex];
+
+
+        if (item) {
+
+            document.getElementById("promptDetails").innerHTML = `
+
+                <img 
+                    src="${item.image}" 
+                    alt="${item.title}"
+                    class="detail-image"
+                >
+
+                <h1>${item.title}</h1>
+
+                <p>
+                    <strong>Category:</strong>
+                    ${item.category}
+                </p>
+
+                <p class="detail-description">
+                    ${item.description}
+                </p>
+
+                <h2>AI Prompt</h2>
+
+                <div class="full-prompt">
+                    ${item.prompt}
+                </div>
+
+                <button onclick="copyPrompt()">
+                    📋 Copy Prompt
+                </button>
+
+            `;
+
+
+            window.copyPrompt = function () {
+
+                navigator.clipboard.writeText(item.prompt);
+
+                alert("Prompt Copied Successfully! 📋");
+
+            };
+
+        }
+
+    </script>
+
+</body>
+
+</html>

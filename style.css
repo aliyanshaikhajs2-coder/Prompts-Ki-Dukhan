@@ -1,0 +1,1057 @@
+/* =========================
+   GLOBAL
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #0d0918;
+    color: white;
+    line-height: 1.6;
+}
+
+button,
+input,
+textarea,
+select {
+    font-family: inherit;
+}
+
+
+/* =========================
+   NAVIGATION BAR
+========================= */
+
+.navbar {
+    width: 100%;
+    min-height: 75px;
+    padding: 12px 5%;
+    background-color: #120d22;
+    border-bottom: 1px solid #2b2047;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+
+/* =========================
+   LOGO
+========================= */
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.logo img {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+    border-radius: 8px;
+    display: block;
+}
+
+
+/* =========================
+   NAVIGATION LINKS
+========================= */
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.nav-links a {
+    color: #c8bfd8;
+    text-decoration: none;
+    font-size: 15px;
+    transition: 0.2s;
+}
+
+.nav-links a:hover {
+    color: #c084fc;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    width: 90%;
+    max-width: 1200px;
+
+    margin: 50px auto;
+    padding: 60px 30px;
+
+    text-align: center;
+
+    background: linear-gradient(
+        135deg,
+        #1c1233,
+        #110b21
+    );
+
+    border: 1px solid #30204d;
+    border-radius: 25px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    color: #bdb3d1;
+    font-size: 18px;
+    margin-bottom: 25px;
+}
+
+.hero input {
+    width: 90%;
+    max-width: 600px;
+
+    padding: 14px 18px;
+
+    border: 1px solid #3b2860;
+    border-radius: 10px;
+
+    background-color: #0f0a1b;
+    color: white;
+
+    outline: none;
+    font-size: 15px;
+}
+
+.hero input:focus {
+    border-color: #8b5cf6;
+
+    box-shadow:
+        0 0 0 3px rgba(139, 92, 246, 0.12);
+}
+
+
+/* =========================
+   CATEGORY BUTTONS
+========================= */
+
+.categories button,
+.category-btn {
+    border: 1px solid #3b2860;
+
+    background: linear-gradient(
+        135deg,
+        #19122d,
+        #120c22
+    );
+
+    color: #d8b4fe;
+
+    padding: 11px 20px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    transition: all 0.25s ease;
+}
+
+.categories button:hover,
+.category-btn:hover {
+    background: linear-gradient(
+        135deg,
+        #7c3aed,
+        #9333ea
+    );
+
+    color: white;
+    border-color: #9333ea;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 6px 18px rgba(124, 58, 237, 0.25);
+}
+
+.categories button:active,
+.category-btn:active {
+    transform: scale(0.96);
+}
+
+
+/* =========================
+   PROMPT SECTION HEADING
+========================= */
+
+#promptHeading {
+    width: 90%;
+    max-width: 1200px;
+
+    margin: 45px auto 20px;
+
+    padding-left: 15px;
+
+    border-left: 4px solid #8b5cf6;
+
+    font-size: 30px;
+
+    color: #f5f3ff;
+}
+
+
+/* =========================
+   PROMPT CONTAINER
+========================= */
+
+#promptContainer {
+    width: 90%;
+    max-width: 1200px;
+
+    margin: 30px auto 60px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(280px, 1fr)
+        );
+
+    gap: 25px;
+}
+
+
+/* =========================
+   PROMPT CARD
+========================= */
+
+.prompt-card {
+    position: relative;
+
+    background:
+        linear-gradient(
+            145deg,
+            #19122b,
+            #120d20
+        );
+
+    border: 1px solid #302448;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+/* =========================
+   CARD HOVER
+========================= */
+
+.prompt-card:hover {
+    transform: translateY(-8px);
+
+    border-color: #8b5cf6;
+
+    box-shadow:
+        0 18px 40px rgba(0, 0, 0, 0.45),
+        0 0 25px rgba(124, 58, 237, 0.12);
+}
+
+
+/* =========================
+   PROMPT IMAGE
+   FULL IMAGE - NO CROPPING
+========================= */
+
+.prompt-card img {
+    width: 100%;
+
+    height: 350px;
+
+    object-fit: contain;
+
+    display: block;
+
+    background-color: #19132d;
+
+    border-bottom: 1px solid #302448;
+}
+
+
+/* =========================
+   PROMPT CONTENT
+========================= */
+
+.prompt-content {
+    padding: 22px;
+}
+
+.prompt-content h3 {
+    font-size: 21px;
+
+    margin-bottom: 10px;
+
+    color: #ffffff;
+}
+
+.prompt-content p {
+    color: #bdb3d1;
+
+    margin-bottom: 10px;
+}
+
+.prompt-content p strong {
+    color: #d8b4fe;
+}
+
+
+/* =========================
+   PROMPT BUTTON AREA
+========================= */
+
+.prompt-content > div {
+    margin-top: 18px;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.view-btn {
+    display: inline-block;
+
+    text-decoration: none;
+
+    border: none;
+
+    padding: 11px 17px;
+
+    border-radius: 8px;
+
+    background: linear-gradient(
+        135deg,
+        #7c3aed,
+        #9333ea
+    );
+
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 14px;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.view-btn:hover {
+    background: linear-gradient(
+        135deg,
+        #8b5cf6,
+        #a855f7
+    );
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 6px 18px rgba(124, 58, 237, 0.3);
+}
+
+
+/* =========================
+   PROMPT DETAIL PAGE
+========================= */
+
+.prompt-detail {
+    width: 90%;
+    max-width: 1000px;
+
+    margin: 50px auto;
+}
+
+.back-btn {
+    display: inline-block;
+
+    margin-bottom: 25px;
+
+    color: #c084fc;
+
+    text-decoration: none;
+
+    font-size: 16px;
+}
+
+.back-btn:hover {
+    color: white;
+}
+
+#promptDetails {
+    background-color: #171027;
+
+    border: 1px solid #30245a;
+
+    border-radius: 20px;
+
+    padding: 30px;
+}
+
+.detail-image {
+    display: block;
+
+    width: 100%;
+
+    max-width: 650px;
+
+    height: 500px;
+
+    object-fit: contain;
+
+    background-color: #100b20;
+
+    border-radius: 15px;
+
+    margin: 0 auto 30px;
+}
+
+#promptDetails h1 {
+    font-size: 36px;
+
+    margin-bottom: 15px;
+}
+
+#promptDetails p {
+    color: #c8c1d9;
+}
+
+.detail-description {
+    margin: 20px 0;
+}
+
+#promptDetails h2 {
+    margin-top: 30px;
+
+    margin-bottom: 15px;
+}
+
+.full-prompt {
+    background-color: #100b20;
+
+    border: 1px solid #30245a;
+
+    border-radius: 12px;
+
+    padding: 20px;
+
+    color: #ddd;
+
+    line-height: 1.7;
+
+    white-space: pre-wrap;
+
+    margin-bottom: 20px;
+}
+
+#promptDetails button {
+    border: none;
+
+    padding: 13px 22px;
+
+    border-radius: 8px;
+
+    background-color: #7c3aed;
+
+    color: white;
+
+    font-size: 16px;
+
+    cursor: pointer;
+}
+
+#promptDetails button:hover {
+    background-color: #9333ea;
+}
+
+
+/* ==================================================
+   ADMIN DASHBOARD
+================================================== */
+
+.admin-container {
+    width: 92%;
+
+    max-width: 1150px;
+
+    margin: 40px auto 80px;
+}
+
+
+/* =========================
+   ADMIN HEADER
+========================= */
+
+.admin-container > h1 {
+    font-size: 38px;
+
+    margin-bottom: 8px;
+
+    color: white;
+}
+
+.admin-container > h1::after {
+    content: "Control your AI prompt library";
+
+    display: block;
+
+    font-size: 15px;
+
+    font-weight: normal;
+
+    color: #9f93b5;
+
+    margin-top: 5px;
+}
+
+
+/* =========================
+   ADMIN SECTIONS
+========================= */
+
+.admin-container > h2,
+.manage-section > h2 {
+    font-size: 23px;
+
+    margin: 35px 0 18px;
+
+    color: #e9d5ff;
+}
+
+
+/* =========================
+   ADD PROMPT FORM
+========================= */
+
+#promptForm {
+    background: linear-gradient(
+        145deg,
+        #181027,
+        #110b1e
+    );
+
+    border: 1px solid #30204d;
+
+    border-radius: 20px;
+
+    padding: 30px;
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.25);
+}
+
+
+/* =========================
+   FORM LABELS
+========================= */
+
+#promptForm label {
+    display: block;
+
+    margin-top: 18px;
+
+    margin-bottom: 7px;
+
+    color: #d8cce5;
+
+    font-size: 14px;
+
+    font-weight: bold;
+}
+
+
+/* =========================
+   INPUTS
+========================= */
+
+#promptForm input,
+#promptForm select,
+#promptForm textarea {
+    width: 100%;
+
+    padding: 13px 15px;
+
+    border-radius: 10px;
+
+    border: 1px solid #332650;
+
+    background-color: #0f0a1b;
+
+    color: white;
+
+    outline: none;
+
+    font-size: 15px;
+
+    transition: 0.2s;
+}
+
+#promptForm input:focus,
+#promptForm select:focus,
+#promptForm textarea:focus {
+    border-color: #8b5cf6;
+
+    box-shadow:
+        0 0 0 3px rgba(139, 92, 246, 0.12);
+}
+
+#promptForm textarea {
+    min-height: 120px;
+
+    resize: vertical;
+}
+
+
+/* =========================
+   FILE INPUT
+========================= */
+
+#promptForm input[type="file"] {
+    padding: 10px;
+
+    cursor: pointer;
+
+    color: #b9aeca;
+}
+
+
+/* =========================
+   SUBMIT BUTTON
+========================= */
+
+#submitBtn {
+    margin-top: 25px;
+
+    width: 100%;
+
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: linear-gradient(
+        135deg,
+        #7c3aed,
+        #9333ea
+    );
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+#submitBtn:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 25px rgba(124, 58, 237, 0.3);
+}
+
+
+/* =========================
+   MANAGE PROMPTS
+========================= */
+
+.manage-section {
+    margin-top: 45px;
+}
+
+#adminPromptList {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(300px, 1fr)
+        );
+
+    gap: 20px;
+}
+
+
+/* =========================
+   ADMIN PROMPT CARD
+========================= */
+
+.admin-prompt {
+    display: flex;
+
+    gap: 18px;
+
+    padding: 18px;
+
+    background-color: #171027;
+
+    border: 1px solid #2e2248;
+
+    border-radius: 16px;
+
+    transition: 0.2s;
+}
+
+.admin-prompt:hover {
+    border-color: #6d28d9;
+
+    transform: translateY(-3px);
+}
+
+
+/* =========================
+   ADMIN IMAGE
+========================= */
+
+.admin-prompt img {
+    width: 110px;
+
+    height: 110px;
+
+    object-fit: contain;
+
+    background-color: #0f0a1b;
+
+    border-radius: 12px;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================
+   ADMIN CARD CONTENT
+========================= */
+
+.admin-prompt h3 {
+    font-size: 18px;
+
+    margin-bottom: 5px;
+
+    color: white;
+}
+
+.admin-prompt p {
+    color: #a99dbb;
+
+    font-size: 14px;
+
+    margin-bottom: 12px;
+}
+
+
+/* =========================
+   ADMIN BUTTONS
+========================= */
+
+.admin-prompt button {
+    border: none;
+
+    padding: 8px 12px;
+
+    border-radius: 7px;
+
+    margin-right: 6px;
+
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 13px;
+}
+
+.admin-prompt button:first-of-type {
+    background-color: #6d28d9;
+}
+
+.admin-prompt button:first-of-type:hover {
+    background-color: #7c3aed;
+}
+
+.admin-prompt button:last-of-type {
+    background-color: #3b1d32;
+}
+
+.admin-prompt button:last-of-type:hover {
+    background-color: #7f1d1d;
+}
+
+
+/* =========================
+   COLLECTION CARDS
+========================= */
+
+.collection-grid {
+    width: 90%;
+
+    max-width: 1200px;
+
+    margin: 30px auto 60px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(250px, 1fr)
+        );
+
+    gap: 22px;
+}
+
+.collection-card {
+    padding: 25px;
+
+    background-color: #171027;
+
+    border: 1px solid #2e2248;
+
+    border-radius: 18px;
+
+    text-align: center;
+
+    transition: 0.25s;
+}
+
+.collection-card:hover {
+    transform: translateY(-6px);
+
+    border-color: #7c3aed;
+
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.3);
+}
+
+.collection-icon {
+    font-size: 42px;
+
+    margin-bottom: 12px;
+}
+
+.collection-card h3 {
+    font-size: 20px;
+
+    margin-bottom: 10px;
+}
+
+.collection-card p {
+    color: #bdb3d1;
+
+    font-size: 14px;
+
+    margin-bottom: 18px;
+}
+
+.collection-card button {
+    border: none;
+
+    padding: 10px 16px;
+
+    border-radius: 8px;
+
+    background-color: #7c3aed;
+
+    color: white;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.collection-card button:hover {
+    background-color: #9333ea;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    margin-top: 70px;
+
+    padding: 30px;
+
+    text-align: center;
+
+    background-color: #120d22;
+
+    border-top: 1px solid #2b2047;
+
+    color: #8f849f;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+
+    .navbar {
+        padding: 12px 4%;
+
+        flex-direction: column;
+
+        justify-content: center;
+
+        gap: 12px;
+    }
+
+    .logo {
+        font-size: 20px;
+    }
+
+    .logo img {
+        width: 40px;
+
+        height: 40px;
+    }
+
+    .nav-links {
+        gap: 16px;
+
+        flex-wrap: wrap;
+
+        justify-content: center;
+    }
+
+    .nav-links a {
+        font-size: 14px;
+    }
+
+    .hero {
+        padding: 40px 20px;
+
+        margin: 30px auto;
+    }
+
+    .hero h1 {
+        font-size: 34px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .hero input {
+        width: 100%;
+    }
+
+    #promptHeading {
+        font-size: 25px;
+
+        margin-top: 35px;
+    }
+
+    #promptContainer {
+        width: 92%;
+
+        grid-template-columns: 1fr;
+
+        gap: 20px;
+    }
+
+    .prompt-card img {
+        height: 350px;
+    }
+
+    .admin-container {
+        width: 94%;
+
+        margin-top: 25px;
+    }
+
+    .admin-container > h1 {
+        font-size: 30px;
+    }
+
+    #promptForm {
+        padding: 20px;
+    }
+
+    #adminPromptList {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-prompt {
+        align-items: flex-start;
+    }
+
+    .admin-prompt img {
+        width: 85px;
+
+        height: 85px;
+    }
+
+    .detail-image {
+        height: 350px;
+    }
+
+    #promptDetails {
+        padding: 20px;
+    }
+
+    #promptDetails h1 {
+        font-size: 28px;
+    }
+
+}
+
+
+/* =========================
+   VERY SMALL MOBILE
+========================= */
+
+@media (max-width: 450px) {
+
+    .admin-prompt {
+        flex-direction: column;
+    }
+
+    .admin-prompt img {
+        width: 100%;
+
+        height: 180px;
+    }
+
+    .admin-prompt button {
+        margin-bottom: 5px;
+    }
+
+}
