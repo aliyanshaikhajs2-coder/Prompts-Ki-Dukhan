@@ -1,20 +1,18 @@
-
- // =========================
- // SUPABASE CONFIG
- // =========================
+// =========================
+// SUPABASE CONFIG
+// =========================
 
 const supabaseUrl =
-    "https://uaihfdlpfryvgvrmnmjc.supabase.co";
+"https://uaihfdlpfryvgvrmnmjc.supabase.co";
 
 const supabaseKey =
-    "sb_publishable_n9njImEoqHVhf4l7Ap9Oxw_GHw1ZTws";
+"sb_publishable_n9njImEoqHVhf4l7Ap9Oxw_GHw1ZTws";
 
 const supabaseClient =
-    supabase.createClient(
-        supabaseUrl,
-        supabaseKey
-    );
-
+supabase.createClient(
+supabaseUrl,
+supabaseKey
+);
 
 // =========================
 // PROMPTS ARRAY
@@ -22,22 +20,19 @@ const supabaseClient =
 
 let prompts = [];
 
-
 // =========================
 // PROMPT CONTAINER
 // =========================
 
 const promptContainer =
-    document.getElementById("promptContainer");
-
+document.getElementById("promptContainer");
 
 // =========================
 // PROMPT HEADING
 // =========================
 
 const promptHeading =
-    document.getElementById("promptHeading");
-
+document.getElementById("promptHeading");
 
 // =========================
 // LOAD PROMPTS FROM DATABASE
@@ -45,75 +40,44 @@ const promptHeading =
 
 async function loadPrompts() {
 
-    if (!promptContainer) {
-        console.error(
-            "Prompt container nahi mila. HTML mein promptContainer ID check karo."
-        );
-        return;
-    }
+const { data, error } =  
+    await supabaseClient  
+        .from("prompts")  
+        .select("*")  
+        .order("created_at", {  
+            ascending: false  
+        });  
 
-    promptContainer.innerHTML = `
-        <div class="prompt-card">
-            <div class="prompt-content">
-                <h3>Loading Prompts...</h3>
-            </div>
-        </div>
-    `;
 
-    try {
+if (error) {  
 
-        const { data, error } =
-            await supabaseClient
-                .from("prompts")
-                .select("*")
-                .order("created_at", {
-                    ascending: false
-                });
+    console.log(error);  
 
-        // =========================
-        // SHOW REAL DATABASE ERROR
-        // =========================
+    promptContainer.innerHTML = `  
+        <div class="prompt-card">  
+            <div class="prompt-content">  
+                <h3>Database Error ❌</h3>  
+                <p>  
+                    Prompts load nahi ho rahe.  
+                </p>  
+            </div>  
+        </div>  
+    `;  
 
-        if (error) {
+    return;  
+}  
 
-            console.error("SUPABASE ERROR:", error);
 
-            promptContainer.innerHTML = `
-                <div class="prompt-card">
-                    <div class="prompt-content">
-                        <h3>Database Error ❌</h3>
-                        <p><strong>Code:</strong> ${error.code || "N/A"}</p>
-                        <p><strong>Message:</strong> ${error.message || "Unknown error"}</p>
-                        <p><strong>Details:</strong> ${error.details || "N/A"}</p>
-                        <p><strong>Hint:</strong> ${error.hint || "N/A"}</p>
-                    </div>
-                </div>
-            `;
+prompts = data || [];  
 
-            return;
-        }
 
-        prompts = data || [];
+// DATABASE TEST  
+console.log("DATABASE DATA:", data);  
 
-        console.log("DATABASE DATA:", data);
 
-        displayPrompts(prompts);
+displayPrompts(prompts);
 
-    } catch (err) {
-
-        console.error("UNEXPECTED ERROR:", err);
-
-        promptContainer.innerHTML = `
-            <div class="prompt-card">
-                <div class="prompt-content">
-                    <h3>Connection Error ❌</h3>
-                    <p>${err.message || "Supabase se connection nahi ho raha."}</p>
-                </div>
-            </div>
-        `;
-    }
 }
-
 
 // =========================
 // DISPLAY PROMPTS
@@ -121,84 +85,93 @@ async function loadPrompts() {
 
 function displayPrompts(promptList) {
 
-    if (!promptContainer) return;
+promptContainer.innerHTML = "";  
 
-    promptContainer.innerHTML = "";
 
-    if (!promptList || promptList.length === 0) {
+if (promptList.length === 0) {  
 
-        promptContainer.innerHTML = `
-            <div class="prompt-card">
-                <div class="prompt-content">
-                    <h3>No Prompts Found</h3>
-                    <p>Abhi koi prompt available nahi hai.</p>
-                </div>
-            </div>
-        `;
+    promptContainer.innerHTML = `  
+        <div class="prompt-card">  
+            <div class="prompt-content">  
+                <h3>No Prompts Found</h3>  
 
-        return;
-    }
+                <p>  
+                    Is category mein abhi koi prompt available nahi hai.  
+                </p>  
+            </div>  
+        </div>  
+    `;  
 
-    promptList.forEach(function(item) {
+    return;  
+}  
 
-        const card = document.createElement("div");
-        card.className = "prompt-card";
 
-        const image = document.createElement("img");
-        image.src = item.image || "";
-        image.alt = item.title || "AI Prompt";
-        image.loading = "lazy";
+promptList.forEach(function(item) {  
 
-        const content = document.createElement("div");
-        content.className = "prompt-content";
+    const card =  
+        document.createElement("div");  
 
-        const title = document.createElement("h3");
-        title.textContent = item.title || "Untitled Prompt";
 
-        const description = document.createElement("p");
-        description.textContent = item.description || "";
+    card.className =  
+        "prompt-card";  
 
-        const category = document.createElement("p");
-        const categoryLabel = document.createElement("strong");
-        categoryLabel.textContent = "Category: ";
-        category.appendChild(categoryLabel);
-        category.appendChild(
-            document.createTextNode(item.category || "Uncategorized")
-        );
 
-        const actions = document.createElement("div");
-        actions.style.display = "flex";
-        actions.style.gap = "10px";
-        actions.style.flexWrap = "wrap";
+    card.innerHTML = `  
 
-        const viewLink = document.createElement("a");
-        viewLink.href = "prompt.html?id=" + encodeURIComponent(item.id);
-        viewLink.className = "view-btn";
-        viewLink.textContent = "View Prompt";
+        <img  
+            src="${item.image}"  
+            alt="${item.title}"  
+        >  
 
-        const copyButton = document.createElement("button");
-        copyButton.className = "view-btn";
-        copyButton.textContent = "📋 Copy Prompt";
-        copyButton.addEventListener("click", function() {
-            copyPrompt(item.id);
-        });
+        <div class="prompt-content">  
 
-        actions.appendChild(viewLink);
-        actions.appendChild(copyButton);
+            <h3>  
+                ${item.title}  
+            </h3>  
 
-        content.appendChild(title);
-        content.appendChild(description);
-        content.appendChild(category);
-        content.appendChild(actions);
+            <p>  
+                ${item.description}  
+            </p>  
 
-        card.appendChild(image);
-        card.appendChild(content);
+            <p>  
+                <strong>Category:</strong>  
+                ${item.category}  
+            </p>  
 
-        promptContainer.appendChild(card);
+            <div  
+                style="  
+                    display:flex;  
+                    gap:10px;  
+                    flex-wrap:wrap;  
+                "  
+            >  
 
-    });
+                <a  
+                    href="prompt.html?id=${item.id}"  
+                    class="view-btn"  
+                >  
+                    View Prompt  
+                </a>  
+
+                <button  
+                    class="view-btn"  
+                    onclick="copyPrompt(${item.id})"  
+                >  
+                    📋 Copy Prompt  
+                </button>  
+
+            </div>  
+
+        </div>  
+
+    `;  
+
+
+    promptContainer.appendChild(card);  
+
+});
+
 }
-
 
 // =========================
 // CATEGORY FILTER
@@ -206,125 +179,182 @@ function displayPrompts(promptList) {
 
 function filterCategory(category) {
 
-    if (category === "All") {
+if (category === "All") {  
 
-        if (promptHeading) {
-            promptHeading.textContent = "Latest AI Prompts";
-        }
+    if (promptHeading) {  
 
-        displayPrompts(prompts);
-        return;
-    }
+        promptHeading.textContent =  
+            "Latest AI Prompts";  
 
-    if (promptHeading) {
-        promptHeading.textContent = category + " AI Prompts";
-    }
+    }  
 
-    const filteredPrompts =
-        prompts.filter(function(item) {
+    displayPrompts(prompts);  
 
-            return (item.category || "").toLowerCase() ===
-                category.toLowerCase();
+    return;  
+}  
 
-        });
 
-    displayPrompts(filteredPrompts);
+if (promptHeading) {  
 
-    const templates = document.getElementById("templates");
+    promptHeading.textContent =  
+        category + " AI Prompts";  
 
-    if (templates) {
-        templates.scrollIntoView({
-            behavior: "smooth"
-        });
-    }
+}  
+
+
+const filteredPrompts =  
+    prompts.filter(function(item) {  
+
+        return item.category  
+            .toLowerCase()  
+            === category.toLowerCase();  
+
+    });  
+
+
+displayPrompts(filteredPrompts);  
+
+
+document.getElementById("templates")  
+    .scrollIntoView({  
+
+        behavior: "smooth"  
+
+    });
+
 }
-
 
 // =========================
 // SEARCH
 // =========================
 
 const searchInput =
-    document.getElementById("searchInput");
+document.getElementById("searchInput");
 
 if (searchInput) {
 
-    searchInput.addEventListener("input", function() {
+searchInput.addEventListener(  
+    "input",  
+    function() {  
 
-        const searchText =
-            searchInput.value.toLowerCase().trim();
+        const searchText =  
+            searchInput.value  
+                .toLowerCase()  
+                .trim();  
 
-        if (searchText === "") {
 
-            if (promptHeading) {
-                promptHeading.textContent = "Latest AI Prompts";
-            }
+        if (searchText === "") {  
 
-            displayPrompts(prompts);
-            return;
-        }
+            if (promptHeading) {  
 
-        if (promptHeading) {
-            promptHeading.textContent = "Search Results";
-        }
+                promptHeading.textContent =  
+                    "Latest AI Prompts";  
 
-        const filteredPrompts =
-            prompts.filter(function(item) {
+            }  
 
-                return (
-                    (item.title || "").toLowerCase().includes(searchText) ||
-                    (item.category || "").toLowerCase().includes(searchText) ||
-                    (item.description || "").toLowerCase().includes(searchText)
-                );
+            displayPrompts(prompts);  
 
-            });
+            return;  
+        }  
 
-        displayPrompts(filteredPrompts);
 
-    });
+        if (promptHeading) {  
+
+            promptHeading.textContent =  
+                "Search Results";  
+
+        }  
+
+
+        const filteredPrompts =  
+            prompts.filter(function(item) {  
+
+                return (  
+
+                    item.title  
+                        .toLowerCase()  
+                        .includes(searchText)  
+
+                    ||  
+
+                    item.category  
+                        .toLowerCase()  
+                        .includes(searchText)  
+
+                    ||  
+
+                    item.description  
+                        .toLowerCase()  
+                        .includes(searchText)  
+
+                );  
+
+            });  
+
+
+        displayPrompts(filteredPrompts);  
+
+    }  
+);
+
 }
-
 
 // =========================
 // COLLECTION FILTER
 // =========================
 
 function openCollection(category) {
-    filterCategory(category);
-}
 
+filterCategory(category);
+
+}
 
 // =========================
 // COPY PROMPT
 // =========================
 
-async function copyPrompt(id) {
+function copyPrompt(id) {
 
-    const selectedPrompt =
-        prompts.find(function(item) {
-            return item.id == id;
-        });
+const selectedPrompt =  
+    prompts.find(function(item) {  
 
-    if (!selectedPrompt) {
-        alert("Prompt nahi mila!");
-        return;
-    }
+        return item.id == id;  
 
-    const promptText = selectedPrompt.prompt || "";
+    });  
 
-    try {
 
-        await navigator.clipboard.writeText(promptText);
-        alert("Prompt Copied Successfully! 📋");
+if (!selectedPrompt) {  
 
-    } catch (err) {
+    alert("Prompt nahi mila!");  
 
-        console.error("COPY ERROR:", err);
-        alert("Copy failed. Please try again.");
+    return;  
 
-    }
+}  
+
+
+const promptText =  
+    selectedPrompt.prompt;  
+
+
+navigator.clipboard.writeText(promptText)  
+
+    .then(function() {  
+
+        alert(  
+            "Prompt Copied Successfully! 📋"  
+        );  
+
+    })  
+
+    .catch(function() {  
+
+        alert(  
+            "Copy failed. Please try again."  
+        );  
+
+    });
+
 }
-
 
 // =========================
 // LOAD DATABASE PROMPTS
